@@ -30,13 +30,13 @@ process.load('FastSimulation.Configuration.Validation_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(10)
+    input = cms.untracked.int32(-1)
 )
 
 # Input source
 process.source = cms.Source("PoolSource",
     dropDescendantsOfDroppedBranches = cms.untracked.bool(False),
-    fileNames = cms.untracked.vstring('file:GENSIM.root'),
+    fileNames = cms.untracked.vstring('file:/afs/cern.ch/work/a/akapoor/Work_May_2015/Validation_TrackState_withSeedState/CMSSW_7_5_0_pre4/src/TTbar_13TeV_TuneCUETP8M1_cfi_GEN_SIM.root'),
     inputCommands = cms.untracked.vstring('keep *', 
         'drop *_genParticles_*_*', 
         'drop *_genParticlesForJets_*_*', 
@@ -117,7 +117,7 @@ process = customisePostLS1(process)
 # load tracker seed validator
 process.load('Validation.RecoTrack.TrackerSeedValidator_cfi')
 process.trackerSeedValidator.TTRHBuilder = "WithoutRefit"
-process.trackerSeedValidator.associators = ['quickTrackAssociatorByHits']
+process.trackerSeedValidator.associators = cms.untracked.VInputTag('quickTrackAssociatorByHits')
 process.trackerSeedValidator.label = cms.VInputTag(
     cms.InputTag("initialStepSeeds"),
     cms.InputTag("detachedTripletStepSeeds"),

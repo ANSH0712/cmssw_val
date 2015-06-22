@@ -412,16 +412,16 @@ TrackCandidateProducer::produce(edm::Event& e, const edm::EventSetup& es) {
  
     } else {
       //create the initial state from the SimTrack
-      int vertexIndex = (*theSimTracks)[currentTrackId].vertIndex();
+      //     int vertexIndex = (*theSimTracks)[currentTrackId].vertIndex();
       //   a) origin vertex
-      GlobalPoint  position((*theSimVtx)[vertexIndex].position().x(),
-			    (*theSimVtx)[vertexIndex].position().y(),
-			    (*theSimVtx)[vertexIndex].position().z());
+      GlobalPoint  position(seedStates[currentTrackId].globalPosition().x(),
+			    seedStates[currentTrackId].globalPosition().y(),
+			    seedStates[currentTrackId].globalPosition().z());
       
       //   b) initial momentum
-      GlobalVector momentum( (*theSimTracks)[currentTrackId].momentum().x() , 
-			     (*theSimTracks)[currentTrackId].momentum().y() , 
-			     (*theSimTracks)[currentTrackId].momentum().z() );
+      GlobalVector momentum( seedStates[currentTrackId].globalMomentum().x() , 
+			     seedStates[currentTrackId].globalMomentum().y() , 
+			     seedStates[currentTrackId].globalMomentum().z() );
       //   c) electric charge
       float        charge   = (*theSimTracks)[simTrackId].charge();
       //  -> inital parameters
